@@ -1,0 +1,1 @@
+web: gunicorn my-gallery-moringa.wsgi --log-file -
