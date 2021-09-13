@@ -55,7 +55,7 @@ class Image(models.Model):
         self.delete() 
 
     def update_caption(self,new_caption):
-        self.image_caption = new_caption
+        self.caption = new_caption
         self.save()
 
     @classmethod
