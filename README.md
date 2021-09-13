@@ -27,7 +27,7 @@ A Django application designed to simulate the functionality of popular social me
 - Run the application.
 
 # Live Page
-A live version of this application is available at:-
+A live version of the application is not yet available. <!-- A live version of this application is available at:- -->
 
 # Known Bugs
 - The app's search functionality does not work.
