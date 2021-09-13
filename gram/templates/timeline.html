@@ -21,30 +21,32 @@
 
         <div class="col-md-6">
             {% for image in timeline_images%}
+            <br>
             <div class="well" style="margin:20px;  background-color:white;">
                 <div>
-                    <h5 style="font-weight:bolder;font-family: 'Heebo', sans-serif;">&nbsp;&nbsp;&nbsp;{{image.user_key}}</h5>
+                    <h5 style="font-weight:bolder;font-family: 'Heebo', sans-serif;">&nbsp;&nbsp;&nbsp;<b>{{image.user_key}}</b></h5>
                 </div>
+                <br>
 
                 <a href="{% url 'updateImage' image.id %}">
                     <img src="{{image.image.url}}" id="timeline_image" style="width:100%;">
                 </a>
+                <br>
 
                 <div style="margin:10px;">
                     <a href="{% url 'like' image.id %}">
                         <span class="glyphicon glyphicon-heart-empty" style="font-size:30px;" id="like_button"></span>&nbsp;&nbsp;&nbsp;
                     </a>
-
                     <a href="{% url 'comment' image.id %}">
                         <span class="glyphicon glyphicon-edit" style="font-size:30px;"></span>
-                    </a>
-
+                    </a>    
                     <span class="glyphicon glyphicon-bookmark" style="font-size:30px;float:right;"></span>
                     <hr>
+
                     <h5 style="font-weight: bolder;">{{image.likes}} likes</h5>
                     <div style="overflow: hidden; height:50px;">
                         <h5>
-                            {{image.comments_number}}&nbsp; comments<a href="{% url 'comment' image.id %}"> View </a>
+                            {{image.comments_number}}&nbsp; comments<a href="{% url 'comment' image.id %}">&nbsp;&nbsp;&nbsp;&nbsp;View </a>
                         </h5>
                     </div>
                     <h5>{{image.pub_date | timesince}} ago</h5>

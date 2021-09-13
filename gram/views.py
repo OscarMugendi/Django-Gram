@@ -11,8 +11,14 @@ import datetime as dt
 from django.http  import Http404
 from . models import Image ,Profile, Like, Follow, Comment
 from django.contrib.auth.decorators import login_required
+from django.contrib.sites.shortcuts import get_current_site
 from . forms import ImageForm, CommentForm, ProfileUpdateForm,UpdateCaption
 from django.template.defaulttags import register
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
 
 
 # Create your views here.
@@ -21,37 +27,39 @@ from django.template.defaulttags import register
 def timeline(request):
     date = dt.date.today()
     current_user = request.user 
-    posts=Image.objects.all()
-    profiles=Profile.objects.all()
-    form=CommentForm
-    comments=Comment.objects.all()
-    followed_people= []
-    user_images =[]
+    #posts=Image.objects.all()
+    #profiles=Profile.objects.all()
+    #comments=Comment.objects.all()
+
+    followed_profiles = []
+    posts_images = []
+
     following  = Follow.objects.filter(follower = current_user)
     is_following = Follow.objects.filter(follower = current_user).count()
+
     try:
-
         if is_following != 0:
-
             for following_object in following:
                 image_set = Profile.objects.filter(id = following_object.user.id)
 
                 for item in image_set:
-                    followed_people.append(item)
+                    followed_profiles.append(item)
 
-            for followed_profile in followed_people:
+            for followed_profile in followed_profiles:
                 post = Image.objects.filter(user_key = followed_profile.user)
 
                 for item in post:
-                    user_images.append(item)
-                    images= list(reversed(user_images))  
 
-            return render(request, 'timeline.html',{"date":date})
+                    posts_images.append(item)
+                    images= list(reversed(posts_images))   
+
+            return render(request,'timeline.html', {"date":date, "timeline_images":images})
+
     except:
 
         raise Http404
 
-    return render(request, 'timeline.html') 
+    return render(request,'timeline.html') 
     
 
 
@@ -233,7 +241,7 @@ def update_image(request,image_id):
             return redirect( more ,image_id)
     else:
 
-        form = UpdateImageCaption()
+        form = UpdateCaption()
 
     return render(request,'update_image.html',{"image":image,"form":form}) 
 
