@@ -30,7 +30,8 @@ A Django application designed to simulate the functionality of popular social me
 A live version of this application is available at:-
 
 # Known Bugs
--
+- The app's search functionality is not yet functional.
+- App registration does not trigger a welcome email.
 
 # Development Status
 - This application is still in its development phase.
