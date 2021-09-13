@@ -185,7 +185,7 @@ def update_profile(request):
 
             form = ProfileUpdateForm()
 
-    return render(request,'update_profile.html',{"title":title,"current_user":current_user,"form":form})
+    return render(request,'updateProfile.html',{"title":title,"current_user":current_user,"form":form})
 
 
 
@@ -198,6 +198,7 @@ def profile(request):
         profile = Profile.objects.get(user_id = current_user)
         following = Follow.objects.filter(follower = current_user)
         followers = Follow.objects.filter(user = profile) 
+        
     except:
 
         profile = Profile.objects.get(username = 'default_user')
@@ -251,13 +252,13 @@ def follow(request,profile_id):
         follower = Follow(follower = current_user,user = requested_profile)
         follower.save() 
 
-        return redirect(view_profiles)
+        return redirect(viewProfiles)
 
     else:
 
         follow_object.delete()
 
-        return redirect(view_profiles)
+        return redirect(viewProfiles)
 
 
 

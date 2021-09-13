@@ -14,41 +14,49 @@
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style="padding:10px;">
-                <h5 style="font-size:35px;">{{profile.username}}</h5>
+                <h5 style="font-size:35px;"><b>{{profile.username}}</b></h5>
+                <br>
                 <p>{{profile.bio}}</p>
+                <br>
+                <hr>
+                <br>
 
                 {% endif %}
                 
                 {% if profile.user == current_user%}
-                <a href="{% url 'update_profile'%}">
+                <a href="{% url 'updateProfile'%}">
                     <button class="btn btn-primary">Update Profile</button>
                 </a>
-
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <a href="{% url 'post' %}">
                     <span class="glyphicon glyphicon-plus-sign" style="font-size:35px;"></span>
                 </a>
-
+                <br>
+                <hr>
+                <br>
                 <h5>
                     <span style="font-weight:bolder;">Followers:&nbsp;&nbsp;&nbsp;</span>
                     {{followers | length }}
                 </h5>
-                
+                <br>
                 <h5>
                     <span style="font-weight:bolder;">Following:&nbsp;&nbsp;&nbsp;</span>
                     {{following | length }}
                 </h5>
+                <br>
+                <hr>
+                <br>
                 
                 {% else%}
 
                 <h3>Profile has not been created yet</h3>
-                <a href="{% url 'update_profile'%}">
+                <a href="{% url 'updateProfile'%}">
                     <button class="btn btn-primary">Create Profile</button>
                 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 
                 {% endif %}
-                <hr>
             </div>
         </div>
 
