@@ -1,0 +1,1 @@
+Welcome to the Django-Gram social media network. This email is sent automatically after successful registration.

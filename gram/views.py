@@ -21,6 +21,10 @@ from django.template.defaulttags import register
 def timeline(request):
     date = dt.date.today()
     current_user = request.user 
+    posts=Image.objects.all()
+    profiles=Profile.objects.all()
+    form=CommentForm
+    comments=Comment.objects.all()
     followed_people= []
     user_images =[]
     following  = Follow.objects.filter(follower = current_user)
@@ -86,11 +90,12 @@ def single_image(request,image_id):
     try:
 
         image = Image.objects.get(id= image_id)
+        comments = Comment.objects.filter(image_id=image_id)
     except:
 
         raise Http404()
 
-    return render(request, 'image.html',{"image":image})
+    return render(request, 'image.html',{"image":image,"comments":comments})
 
 
 
@@ -196,16 +201,18 @@ def profile(request):
     try:
 
         profile = Profile.objects.get(user_id = current_user)
+        images = Image.objects.filter(user_key=current_user)
         following = Follow.objects.filter(follower = current_user)
         followers = Follow.objects.filter(user = profile) 
         
     except:
 
         profile = Profile.objects.get(username = 'default_user')
+        images = Image.objects.filter(user_key=current_user)
         following = Follow.objects.filter(follower = current_user)
         followers = Follow.objects.filter(user = profile)
 
-    return render(request, 'profile.html',{"profile":profile,"current_user":current_user,"following":following,"followers":followers})
+    return render(request, 'profile.html',{"profile":profile,"current_user":current_user,"following":following,"followers":followers,"images":images})
 
 
 
@@ -252,13 +259,15 @@ def follow(request,profile_id):
         follower = Follow(follower = current_user,user = requested_profile)
         follower.save() 
 
-        return redirect(viewProfiles)
+        return redirect(timeline)
 
     else:
 
         follow_object.delete()
 
-        return redirect(viewProfiles)
+        return redirect(timeline)
+
+    return render(request,'all_profiles.html')
 
 
 

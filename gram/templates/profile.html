@@ -37,10 +37,14 @@
                 <hr>
                 <br>
                 <h5>
+                    <span style="font-weight:bolder;">Posts:&nbsp;&nbsp;&nbsp;</span>
+                    {{images | length }}
+                </h5>
+                <br>
+                <h5>
                     <span style="font-weight:bolder;">Followers:&nbsp;&nbsp;&nbsp;</span>
                     {{followers | length }}
                 </h5>
-                <br>
                 <h5>
                     <span style="font-weight:bolder;">Following:&nbsp;&nbsp;&nbsp;</span>
                     {{following | length }}
@@ -63,4 +67,35 @@
     </div>
     <div class="col-md-2"></div>
 </div>
+
+<br>
+<hr>
+<br>
+
+<main>
+	<div class="container">
+		<div class="gallery row">
+            {% for image in images %}
+
+			<div class="gallery-item col col-md-4" tabindex="0">
+				<img width="300px" height="300px" src="{{image.image.url}}" alt="">
+                <br>
+                <br>
+                <a href="/image/{{image.id}}" target="_blank">{{image.image_name}}</a>
+                <br>
+                <br>
+				<div class="gallery-item-info">
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true">{{likes|length}}</i> </li>
+                        <br>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i>{{comments|length}}</li>
+					</ul>
+				</div>
+			</div>
+
+            {% endfor %}
+		</div>  
+		<div class="loader"></div>
+	</div>
+</main>
 {% endblock %}

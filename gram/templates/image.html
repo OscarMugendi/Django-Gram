@@ -2,25 +2,67 @@
 {% block content %}
 
 <div class="container">
-    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
-
-    <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5 col-xl-5">
-        <div class="row">
-            <img src="{{image.image}}" class="img-responsive" alt="">
+    <br>
+    <br>
+    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+        <div class="container row">
+            <img src="{{image.image.url}}" class="img-responsive" alt="">
         </div>
     </div>
 
-    <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5 col-xl-5"></div>
-    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
-
     <div class="row">
-        <h1 class="text-center">{{image.id}}</h1>
+        <h1 class="text-center"><b>{{image.image_name}}</b></h1>
     </div>
 
-    <div class="row">
-        <p>{{image.bio}}</p>
+    <br>
+    <hr>
+    <br>
+    <div class="container">
+        <h4><b>Caption</b></h4>
+        <br>
+        <div class="row">
+            <p>{{image.caption}}</p>
+        </div>
     </div>
+    <br>
+    <div class="gallery-item-info">
+        <ul>
+            <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true">{{likes|length}}</i> </li>
+            <br>
+            <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i>{{comments|length}}</li>
+        </ul>
+    </div>
+    <br>
+</div>
+<br>
+<hr>
+<br>
+<div class="container">
+    <div class="row">
 
+        {% if all_comments %}
+            <div class="col-md" >
+                <h3 class="text-center" id="coms">Comments</h3>
+
+                {% for comment in all_comments %}
+                   <div class="card w-90 mb-3" >
+                       <div class="card-body">
+                         <p class="card-title">{{ comment.comment }}</p>
+                         <p class="card-text">- {{comment.user.username}}</p>
+                       </div>
+                   </div>
+                {% endfor %}
+
+               </div>
+           </div>
+        {%else%}
+
+        <div class="card w-90 mb-3">
+            <div class="card-body">
+              <p class="card-title text-center">No comments available.</p>
+            </div>
+        </div> 
+        {%endif%}
 </div>
 
 {% endblock %}

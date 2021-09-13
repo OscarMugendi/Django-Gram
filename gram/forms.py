@@ -16,7 +16,7 @@ class CommentForm(forms.ModelForm):
 class ProfileUpdateForm(forms.Form):
     username = forms.CharField(label='Username',max_length = 30)
     profile_photo = forms.ImageField(label = 'Image Field') 
-    bio = forms.CharField(label='Caption',max_length=500)
+    bio = forms.CharField(label='Bio',max_length=300)
 
 class UpdateCaption(forms.Form):
     caption = forms.CharField(label='Caption',max_length=300)
