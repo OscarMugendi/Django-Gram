@@ -38,17 +38,16 @@
 <div class="container">
     <div class="row">
 
-        {% if all_comments %}
+        {% if comments %}
             <div class="col-md" >
                 <h3 class="text-center" id="coms">Comments</h3>
+                <br>
 
-                {% for comment in all_comments %}
-                   <div class="card w-90 mb-3" >
-                       <div class="card-body">
-                         <p class="card-title">{{ comment.comment }}</p>
-                         <p class="card-text">- {{comment.user.username}}</p>
-                       </div>
-                   </div>
+                {% for comment in comments %}
+                    <h5><span style="font-weight:bolder;">@{{comment.user_id}}:</span>
+                        &nbsp;&nbsp;{{comment}}
+                    </h5>
+                    <br>
                 {% endfor %}
 
                </div>
