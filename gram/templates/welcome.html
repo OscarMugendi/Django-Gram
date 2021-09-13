@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+{%load bootstrap3 %}
+
+{% block content %}
+
+<div class="row">
+    <div style="text-align:center">
+        <h3>Your timeline is empty. <a href="{% url 'viewProfiles' %}">View Profiles.</a></h3>
+    </div>
+</div>
+
+{% endblock%}

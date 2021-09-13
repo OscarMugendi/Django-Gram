@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{%load bootstrap3 %}
+
+{% block styles %}
+
+{{block.super}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Fjalla+One|Heebo" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+
+{{block.super}}
+
+<main role="main">
+    <div>
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading" style="font-size:72px;" ><b>Django-Gram</b></h1>
+                <br>
+                <p class="lead text-muted"><i>The world's premier Instagram clone.</i></p>
+                <br>
+                <br>
+            </div>
+        </section>
+    </div>
+</main>
+<br>
+<div class="container text-center">
+    <p><a href="{% url 'registration_register' %}" class="btn btn-success btn-lg">Create new account...</a></p>
+    <br>
+    <p>
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Log in...</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{% url 'logout' %}" class="btn btn-danger btn-lg">Log out..</a>
+    </p>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+{{block.super}}
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+
+{% endblock %}

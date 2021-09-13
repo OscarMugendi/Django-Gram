@@ -1,8 +1,11 @@
 import os
+import json
+from decouple import config, Csv
+from django.db.models import Sum, Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.templatetags.static import static
-from django.http  import HttpResponse, Http404
+from django.http  import HttpResponse, Http404, JsonResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
 import datetime as dt
 from django.http  import Http404
@@ -15,7 +18,7 @@ from django.template.defaulttags import register
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
-def index(request):
+def timeline(request):
     date = dt.date.today()
     current_user = request.user 
     followed_people= []
@@ -26,8 +29,8 @@ def index(request):
 
         if is_following != 0:
 
-            for folling_object in following:
-                image_set = Profile.objects.filter(id = folling_object.user.id)
+            for following_object in following:
+                image_set = Profile.objects.filter(id = following_object.user.id)
 
                 for item in image_set:
                     followed_people.append(item)
@@ -39,12 +42,12 @@ def index(request):
                     user_images.append(item)
                     images= list(reversed(user_images))  
 
-            return render(request, 'index.html',{"date":date})
+            return render(request, 'timeline.html',{"date":date})
     except:
 
         raise Http404
 
-    return render(request, 'all-grams/first_time.html') 
+    return render(request, 'timeline.html') 
     
 
 
@@ -56,12 +59,12 @@ def search_results(request):
         users_found = Profile.find_profile(search_name)
         message =f"{search_name}" 
 
-        return render(request,'search.html',{"message":message,"users_found":users_found})
+        return render(request,'search_results.html',{"message":message,"users_found":users_found})
     else:
 
         message = "Please enter a valid username"
 
-    return render(request,'all-grams/search_results.html',{"message":message})
+    return render(request,'search_results.html',{"message":message})
 
 
 
@@ -74,7 +77,7 @@ def single_user(request,id):
 
         raise Http404()
 
-    return render(request,'profile.html',{"user":user})
+    return render(request,'profile.html',{"user":user,"single_user":single_user})
 
 
 
@@ -105,7 +108,7 @@ def post(request):
             image.likes +=0
             image.save() 
 
-            return redirect(index)
+            return redirect(timeline)
     else:
 
         form = ImageForm() 
@@ -134,7 +137,7 @@ def comment(request, image_id):
             current_image.save_image()
             comment.save()
 
-            return redirect(index)
+            return redirect(timeline)
 
     else:
 
@@ -279,16 +282,19 @@ def like(request,image_id):
         requested_image.likes -=1
         requested_image.save_image()
 
-        for single_unlike in unlike_parameter:
+        for single_unlike in dislike:
 
-            single_unlike.unlike()
+            single_unlike.delete_like()
 
         return redirect(timeline)
     
-    return render(request,'index.html')
+    return render(request,'timeline.html')
 
 
 
-@login_required(login_url='/accounts/login/')
+def home(request):
+    return render(request,'home.html')
+
+
 def welcome(request):
     return render(request,'welcome.html')

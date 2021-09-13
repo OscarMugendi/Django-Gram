@@ -9,18 +9,21 @@
 <body>
 <nav class="navbar navbar-inverse bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+        <a class="navbar-brand" href="{% url 'home' %}"><b>Home</b>&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        <a class="navbar-brand" href="{% url 'timeline' %}"><b>Timeline</b>&nbsp;&nbsp;</a>
+        <a class="navbar-brand" href="{% url 'profile' %}"><b>Profile</b></a>
 
         <div class="col-sm-4 col-md-4 navbar-right">
             <form class="navbar-form" role="search" action="/search">
                 <div class="input-group">
-                    <input class="form-control" type="search" placeholder="Search for Users" name="user_search" aria-label="Search Users">
+                    <input class="form-control" type="search" placeholder="Search Profiles" name="user_search" aria-label="Search Profiles">
                     <div class="input-group-btn">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </div>
                 </div>
             </form>
         </div>
+
     </div>
 </nav>
 </body>

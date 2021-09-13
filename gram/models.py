@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import Sum
+from django.db.models import Sum, Q
+import datetime as dt
 
 # Create your models here.
 
@@ -11,6 +12,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     username = models.CharField(max_length=30,default='User')
+    email = models.EmailField(null=True)
     profile_photo = models.ImageField(blank=True,upload_to = 'images/', null=True)
     bio = models.TextField(max_length = 255,blank=True)
 
