@@ -149,9 +149,6 @@ EMAIL_HOST_PASSWORD = 'codingstudent001'
 LOGIN_REDIRECT_URL='timeline'
 LOGOUT_REDIRECT_URL='home'
 
-# Configure Django App for Heroku.
-django_on_heroku.settings(locals())
-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 MODE=config("MODE", default="dev")
@@ -181,3 +178,6 @@ else:
 
 db_from_env=dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+# Configure Django App for Heroku.
+django_on_heroku.settings(locals())
