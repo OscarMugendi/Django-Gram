@@ -1,1 +1,1 @@
-web: gunicorn django-gram-moringa.wsgi --log-file -
+web: gunicorn django_gram.wsgi --log-file -
