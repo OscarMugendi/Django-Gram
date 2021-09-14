@@ -19,6 +19,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from .email import send_welcome_email
 
 
 # Create your views here.
@@ -64,17 +65,20 @@ def timeline(request):
 
 
 @login_required(login_url='/accounts/login/')
-def search_results(request):
-    if 'name' in request.GET and request.GET["name"]: 
+def search(request):
+    if 'username' in request.GET and request.GET["username"]: 
 
-        search_name = request.GET.get("name")
-        users_found = Profile.find_profile(search_name)
-        message =f"{search_name}" 
+        search_term = request.GET.get("username")
+        searched_user = Profile.find_profile(search_term)
+        #searched_user = Profile.objects.filter(username=search_term).all()
+        if searched_user:
+            message =f"{search_term}" 
 
-        return render(request,'search_results.html',{"message":message,"users_found":users_found})
+            return render(request,'search_results.html',{"message":message,"searched_user":searched_user})
+
     else:
 
-        message = "Please enter a valid username"
+        message = "Please enter a valid username."
 
     return render(request,'search_results.html',{"message":message})
 
