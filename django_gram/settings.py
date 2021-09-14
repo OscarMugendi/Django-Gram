@@ -157,6 +157,9 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 #ALLOWED_HOSTS = []
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
+# Configure Django App for Heroku.
+django_on_heroku.settings(locals())
+
 if config('MODE')=="dev":
     DATABASES = {
         'default': {
@@ -178,6 +181,3 @@ else:
 
 db_from_env=dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
-
-# Configure Django App for Heroku.
-django_on_heroku.settings(locals())

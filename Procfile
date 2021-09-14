@@ -1,1 +1,1 @@
-web: gunicorn my-gallery-moringa.wsgi --log-file -
+web: gunicorn django-gram-moringa.wsgi --log-file -
