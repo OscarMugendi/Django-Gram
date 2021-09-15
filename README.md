@@ -1,5 +1,5 @@
 # Django-Gram
-A Django application designed to simulate the functionality of popular social media application, Instagram.
+A Django application designed to simulate the functionality of the popular social media application, Instagram.
 
 # Requirements
 - Python3
@@ -30,11 +30,7 @@ A Django application designed to simulate the functionality of popular social me
 A live version of this application is available at:- https://django-gram-moringa.herokuapp.com/
 
 # Known Bugs
-- The app's search functionality does not work.
-- Creating a new account does not trigger a welcome email.
-
-# Development Status
-- This application is still in its development phase.
+-
 
 # Authors
 - Oscar Mugendi
