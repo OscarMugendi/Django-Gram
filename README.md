@@ -12,12 +12,12 @@ A Django application designed to simulate the functionality of the popular socia
 - Pip
 - Postgresql
 - Heroku
-- Django 3.2.7
-- django-bootstrap3 15.0.0
-- django-registration-redux 2.9
-- Pillow 8.3.2
-- psycopg2-binary 2.9.1
-- python-decouple 3.4
+- Django
+- django-bootstrap3
+- django-registration-redux
+- Pillow
+- psycopg2-binary
+- python-decouple
 
 # Installation
 - Clone the repository.
